@@ -1,5 +1,4 @@
 #include "can_proto.h"
-#include <iostream>
 
 bool compose_and_send(CanTransport *can, Can_Aid aid, tracked_outgoing *state)
 {
@@ -73,7 +72,7 @@ void parse_frame(CAN_message_t *frame, incoming_vars *state)
     break;
   case ECM_CAP_ENERGY:
   {
-    state->super_cap_energy_joules = ((*((uint16_t*)&frame->buf[CAN_ECM_CAP_ENERGY_ENERGY_REL_OFFSET]))*0.1f) * 0.000278; //converts to WH, naming convention is no longer accurate as it is NOT Joules
+    state->super_cap_energy = ((*((uint16_t *)&frame->buf[CAN_ECM_CAP_ENERGY_ENERGY_REL_OFFSET])) * 1.0f) * 0.000278; // In WH and increments of 1WH
     state->cap_volts = *((uint16_t*)&frame->buf[CAN_ECM_CAP_ENERGY_CAP_VOLTAGE_OFFSET]);
   }
   break;

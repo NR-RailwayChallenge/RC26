@@ -52,7 +52,7 @@ struct incoming_vars{
     bool driver_throttle_en;
     //ECM Cap energy
     // Handheld will only read the rel value. Abs to be shown via RDT.
-    float super_cap_energy_joules;
+    float super_cap_energy;
     uint16_t cap_volts;
     //ECM Vesc Power
     float trac_current;

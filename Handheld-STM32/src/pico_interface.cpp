@@ -4,8 +4,7 @@ PicoInterface::PicoInterface(uint32_t Tx, uint32_t Rx)
 {
     memset(&pBuf,0,sizeof(pBuf));
     memset(&pDiag,0,sizeof(pDiag));
-    // HardwareSerial is abstract on this Arduino core; use the configured UART.
-    ser = &Serial1;
+    ser = new HardwareSerial(Rx, Tx);
     ser->begin(PICO_SERIAL_BAUD);
 }
 
@@ -50,8 +49,7 @@ void PicoInterface::import_states(incoming_vars *ivar)
     pBuf.buscap = ivar->cap_volts;
     pBuf.busTrac = ivar->bus_vesc;
     pBuf.message = ivar->msg_push;
-    pBuf.regenEnergy = ivar->super_cap_energy_joules;
-    pBuf.speed = ivar->trac_velocity;
+    pBuf.regenEnergy = ivar->super_cap_energy;
     pBuf.tractionCurrent = ivar->trac_current;
     uint32_t flags_temp = 0 | (ivar->direction_flag & 1) << PICO_PACK_FLAG_DIR | (ivar->kill_switch_relay & 1) << PICO_PACK_FLAG_KSR | (ivar->h_e_stop & 1) << PICO_PACK_FLAG_ES | (ivar->s_e_stop & 1) << PICO_PACK_FLAG_SOFT_ES | (ivar->brake_1 & 1) << PICO_PACK_FLAG_BK_BR1 | (ivar->brake_2 & 1) << PICO_PACK_FLAG_BK_BR2 | (ivar->brake_3 & 1) << PICO_PACK_FLAG_BK_BR3 | (ivar->master_brake_relay & 1) << PICO_PACK_FLAG_BK_MBR | (ivar->brake_fault & 1) << PICO_PACK_FLAG_BF | ((ivar->drive_mode == drive_mode_t::Autostop) & 1) << PICO_PACK_FLAG_AS_EN | (ivar->stationary_lock & 1) << PICO_PACK_FLAG_BK_BH | ((ivar->drive_mode == drive_mode_t::Regen) & 1) << PICO_PACK_FLAG_RG_EN | (ivar->autostop_marker_found & 1) << PICO_PACK_FLAG_AS_MD | (ivar->fire_alarm & 1) << PICO_PACK_FLAG_FIRE | (ivar->auto_throttle_en & 1) << PICO_PACK_FLAG_ATE | (ivar->driver_throttle_en & 1) << PICO_PACK_FLAG_DTE | ((ivar->drive_mode == drive_mode_t::Shunting) & 1) << PICO_PACK_FLAG_SHUNT_MODE | ((ivar->coupler_status) & 3) << PICO_PACK_COUPLER;
     // Clear the bits for the flags we are writing
