@@ -1,0 +1,42 @@
+#ifndef LED_ARRAY_LAYOUT
+#define LED_ARRAY_LAYOUT
+
+#define NEOPIX_BRIGHTNESS 255
+
+#define LED_POWER_PANEL 0
+#define LED_POWER_INDEX 3
+
+#define LED_JR_EN_PANEL 0
+#define LED_JR_EN_INDEX 2
+
+#define LED_DIR_FWD_PANEL 0
+#define LED_DIR_FWD_INDEX 5
+
+#define LED_DIR_REV_PANEL 0
+#define LED_DIR_REV_INDEX 0
+
+#define LED_TEI_FWD_PANEL 0
+#define LED_TEI_FWD_INDEX 4
+
+#define LED_TEI_REV_PANEL 0
+#define LED_TEI_REV_INDEX 1
+
+#define LED_AS_PANEL 1
+#define LED_AS_INDEX 0
+
+#define LED_FIRE_PANEL 1
+#define LED_FIRE_INDEX 1
+
+#define LED_ES_PANEL 1
+#define LED_ES_INDEX 2
+
+#define LED_BRAKE_PANEL 1
+#define LED_BRAKE_INDEX 3
+
+#define LED_BF_PANEL 1
+#define LED_BF_INDEX 4
+
+#define LED_REGEN_PANEL 1
+#define LED_REGEN_INDEX 5
+
+#endif //LED_ARRAY_LAYOUT
